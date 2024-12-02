@@ -358,17 +358,6 @@ const FacultyDetail = () => {
   ];
   const { id } = useParams();
 
-//   createdAt: "2024-11-27T07:57:07.059Z",
-//   FacultyName: "Modern Bronze Pizza",
-//   FacultyImage:
-//     "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/350.jpg",
-//   FacultyInitial: "VI",
-//   FacultyDescription:
-//     "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-//   FacultyDateOfBirth: "1994-04-29T11:57:31.045Z",
-//   id: "1",
-
-
   let faculty = faculties[id-1]
   return (
     <>

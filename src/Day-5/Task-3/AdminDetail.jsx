@@ -3,12 +3,12 @@ import { Link, useParams } from "react-router-dom";
 
 const AdminDetailAPI = () => {
   
-  const [faculties, setFaculties] = useState([]);
+  const [admin, setAdmin] = useState([]);
 
   useEffect(() => {
-    fetch(`https://674ecbf5bb559617b26cbc04.mockapi.io/Faculty/${id}`)
+    fetch(`https://6715d69e33bc2bfe40bb44cb.mockapi.io/Admin/${id}`)
     .then(res=>res.json())
-    .then(data=>setFaculties(data))
+    .then(data=>setAdmin(data))
   },[])
 
   const { id } = useParams();
@@ -16,13 +16,13 @@ const AdminDetailAPI = () => {
   return (
     <>
 
-        <img src={faculties.FacultyImage}/><br/>
-        Name:{faculties.FacultyName}<br/>
-        Initial: {faculties.FacultyInitial}<br/>
-        Description: {faculties.FacultyDescription}<br/>
-        Date of Birth: {new Date(faculties.FacultyDateOfBirth).toLocaleDateString()}<br/>
+        <img src={admin.adminImage}/><br/>
+        Name:{admin.adminName}<br/>
+        Age: {admin.adminAge}<br/>
+        Email: {admin.adminEmail}<br/>
+        Department: {admin.adminDepartment}<br/>
       <Link to="/">
-        <button>Back to Faculty List</button>
+        <button>Back to Admin List</button>
       </Link>
     </>
   );

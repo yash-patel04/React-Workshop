@@ -1,19 +1,33 @@
 import React, { useState } from "react";
 
 const CRUD = () => {
-  let [name, setName] = useState([]);
-  let [data, setData] = useState("");
+  let [data, setData] = useState([]);
+  let [info, setInfo] = useState({
+    name: "",
+    age: "",
+  });
 
-  let formattedName = name.map((n, i) => {
+  let formattedName = data.map((n, i) => {
     return (
       <>
         <tr>
-          <td>{n}</td>{" "}
+          <td>{n.name}</td>{" "}
+          <td>{n.age}</td>{" "}
+          {/* <td>
+            <button
+              className="btn btn-warning"
+              onClick={() => {
+                setName(name.filter((_, index) => index !== i));
+              }}
+            >
+              Edit
+            </button>
+          </td>{" "} */}
           <td>
             <button
               className="btn btn-danger"
               onClick={() => {
-                setName(name.filter((_, index) => index !== i));
+                setData(data.filter((_, index) => index !== i));
               }}
             >
               Delete
@@ -32,9 +46,21 @@ const CRUD = () => {
           <td>
             <input
               type="text"
-              value={data}
+              value={info.name}
               onChange={(e) => {
-                setData(e.target.value);
+                setInfo({...info, name: e.target.value});
+              }}
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Age:</td>
+          <td>
+            <input
+              type="number"
+              value={info.age}
+              onChange={(e) => {
+                setInfo({...info, age: e.target.value});
               }}
             />
           </td>
@@ -44,8 +70,11 @@ const CRUD = () => {
             <button
               className="btn btn-success"
               onClick={() => {
-                setName([...name, data]);
-                setData("");
+                setData([...data, info]);
+                setInfo({
+                  name :"",
+                  age: "",
+                });
               }}
             >
               {" "}

@@ -38,6 +38,10 @@ import Eleventh from "./Day-3/Pages/Eleventh";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FacultyCard from "./Day-4/FacultyCard";
 import FacultyDetail from "./Day-4/FacultyDetail";
+import FacultyCardAPI from "./Day-5/Task-1/FacultyCard";
+import FacultyDetailAPI from "./Day-5/Task-1/FacultyDetail";
+import StudentCard from "./Day-5/Task-2/StudentCard";
+import StudentDetail from "./Day-5/Task-2/StudentDetail";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -81,10 +85,20 @@ root.render(
   // <CRUD/>
   // <StateData/>
   // <FacultyCard/>
+  // <BrowserRouter>
+  //   <Routes>
+  //     <Route path="/" element={<FacultyCard />} />
+  //     <Route path="/faculty/:id" element={<FacultyDetail />} />
+  //   </Routes>
+  // </BrowserRouter>
+
+  // Day - 5
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<FacultyCard />} />
-      <Route path="/faculty/:id" element={<FacultyDetail />} />
+      {/* <Route path="/" element={<FacultyCardAPI />} />
+      <Route path="/facultyapi/:id" element={<FacultyDetailAPI />} /> */}
+      <Route path="/" element={<StudentCard />} />
+      <Route path="/student/:id" element={<StudentDetail />} />
     </Routes>
   </BrowserRouter>
 );

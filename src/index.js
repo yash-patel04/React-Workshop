@@ -46,6 +46,7 @@ import AdminCardAPI from "./Day-5/Task-3/AdminCard";
 import AdminDetailAPI from "./Day-5/Task-3/AdminDetail";
 import EmployeeCard from "./Day-5/Task-4/EmployeeCard";
 import EmployeeDetail from "./Day-5/Task-4/EmployeeDetail";
+import CRUDwithAPI from "./Day-5/CRUD/CRUD";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -97,18 +98,19 @@ root.render(
   // </BrowserRouter>
 
   // Day - 5
-  <BrowserRouter>
-    <Routes>
-      {/* <Route path="/" element={<FacultyCardAPI />} />
-      <Route path="/facultyapi/:id" element={<FacultyDetailAPI />} /> */}
-      {/* <Route path="/" element={<StudentCard />} />
-      <Route path="/student/:id" element={<StudentDetail />} /> */}
-      {/* <Route path="/" element={<AdminCardAPI />} />
-      <Route path="/admin/:id" element={<AdminDetailAPI />} /> */}
-      <Route path="/" element={<EmployeeCard />} />
-      <Route path="/employee/:id" element={<EmployeeDetail />} />
-    </Routes>
-  </BrowserRouter>
+  // <BrowserRouter>
+  //   <Routes>
+  //     <Route path="/" element={<FacultyCardAPI />} />
+  //     <Route path="/facultyapi/:id" element={<FacultyDetailAPI />} />
+  //     <Route path="/" element={<StudentCard />} />
+  //     <Route path="/student/:id" element={<StudentDetail />} />
+  //     <Route path="/" element={<AdminCardAPI />} />
+  //     <Route path="/admin/:id" element={<AdminDetailAPI />} />
+  //     <Route path="/" element={<EmployeeCard />} />
+  //     <Route path="/employee/:id" element={<EmployeeDetail />} />
+  //   </Routes>
+  // </BrowserRouter>
+  <CRUDwithAPI />
 );
 
 // If you want to start measuring performance in your app, pass a function

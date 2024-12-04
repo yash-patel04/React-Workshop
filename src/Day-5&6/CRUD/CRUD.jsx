@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CRUDwithAPI = () => {
   let [data, setData] = useState([]);
@@ -7,12 +8,14 @@ const CRUDwithAPI = () => {
     studentEnrol: "",
     studentEmail: "",
   });
+  let [isUpdate, setIsUpdate] = useState(false);
+  // let navigate = useNavigate();
 
   useEffect(() => {
     fetch(`https://674f01b2bb559617b26da25d.mockapi.io/Student/`)
       .then((res) => res.json())
       .then((data) => setData(data));
-  }, []);
+  }, [isUpdate]);
 
   const handleSubmit = () => {
     fetch(`https://674f01b2bb559617b26da25d.mockapi.io/Student/`, {
@@ -23,59 +26,24 @@ const CRUDwithAPI = () => {
       body: JSON.stringify(student),
     })
       .then((res) => res.json())
-      .then((newStudent) => {
-        setData([...data, newStudent]);
+      .then(() => {
+        setIsUpdate(!isUpdate);
         setStudent({
           studentName: "",
           studentEnrol: "",
           studentEmail: "",
         });
-      })
+      });
   };
 
   const handleDelete = (id) => {
     fetch(`https://674f01b2bb559617b26da25d.mockapi.io/Student/${id}`, {
-      method: "DELETE"
-    })
-      .then(() => {
-        setData(data.filter((stu) => stu.id !== id));
-      })
+      method: "DELETE",
+    }).then(() => {
+      setIsUpdate(!isUpdate);
+      // navigate("/")
+    });
   };
-
-  let formattedStudent = data.map((stu) => {
-    return (
-      <>
-        <tr key={stu.id}>
-          <td>{stu.studentName}</td>
-          <td>{stu.studentEnrol}</td>
-          <td>{stu.studentEmail}</td>
-          {/* <td>
-            <button
-              className="btn btn-warning"
-              onClick={() => {
-                setName(name.filter((_, index) => index !== i));
-              }}
-            >
-              Edit
-            </button>
-          </td>{" "} */}
-          <td>
-            <button
-              className="btn btn-danger"
-              onClick={
-                () => {
-                // setData(data.filter((_, index) => index !== i));
-                handleDelete(stu.id)
-              }
-            }
-            >
-              Delete
-            </button>
-          </td>
-        </tr>
-      </>
-    );
-  });
 
   return (
     <>
@@ -143,7 +111,31 @@ const CRUDwithAPI = () => {
           <td className="font-weight-bold">Email</td>
           <td className="font-weight-bold">Actions</td>
         </tr>
-        {formattedStudent}
+        {data.map((stu) => (
+          <>
+            <tr key={stu.id}>
+              <td>{stu.studentName}</td>
+              <td>{stu.studentEnrol}</td>
+              <td>{stu.studentEmail}</td>
+              <td>
+                <button className="btn btn-warning" onClick={() => {}}>
+                  Edit
+                </button>
+              </td>{" "}
+              <td>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => {
+                    // setData(data.filter((_, index) => index !== i));
+                    handleDelete(stu.id);
+                  }}
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </>
+        ))}
       </table>
     </>
   );

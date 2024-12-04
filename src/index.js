@@ -38,15 +38,15 @@ import Eleventh from "./Day-3/Pages/Eleventh";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FacultyCard from "./Day-4/FacultyCard";
 import FacultyDetail from "./Day-4/FacultyDetail";
-import FacultyCardAPI from "./Day-5/Task-1/FacultyCard";
-import FacultyDetailAPI from "./Day-5/Task-1/FacultyDetail";
-import StudentCard from "./Day-5/Task-2/StudentCard";
-import StudentDetail from "./Day-5/Task-2/StudentDetail";
-import AdminCardAPI from "./Day-5/Task-3/AdminCard";
-import AdminDetailAPI from "./Day-5/Task-3/AdminDetail";
-import EmployeeCard from "./Day-5/Task-4/EmployeeCard";
-import EmployeeDetail from "./Day-5/Task-4/EmployeeDetail";
-import CRUDwithAPI from "./Day-5/CRUD/CRUD";
+import FacultyCardAPI from "./Day-5&6/Task-1/FacultyCard";
+import FacultyDetailAPI from "./Day-5&6/Task-1/FacultyDetail";
+import StudentCard from "./Day-5&6/Task-2/StudentCard";
+import StudentDetail from "./Day-5&6/Task-2/StudentDetail";
+import AdminCardAPI from "./Day-5&6/Task-3/AdminCard";
+import AdminDetailAPI from "./Day-5&6/Task-3/AdminDetail";
+import EmployeeCard from "./Day-5&6/Task-4/EmployeeCard";
+import EmployeeDetail from "./Day-5&6/Task-4/EmployeeDetail";
+import CRUDwithAPI from "./Day-5&6/CRUD/CRUD";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -97,12 +97,12 @@ root.render(
   //   </Routes>
   // </BrowserRouter>
 
-  // Day - 5
+  // Day - 5 & 6
   // <BrowserRouter>
   //   <Routes>
   //     <Route path="/" element={<FacultyCardAPI />} />
   //     <Route path="/facultyapi/:id" element={<FacultyDetailAPI />} />
-  //     <Route path="/" element={<StudentCard />} />
+  //     <Route index element={<StudentCard />} />
   //     <Route path="/student/:id" element={<StudentDetail />} />
   //     <Route path="/" element={<AdminCardAPI />} />
   //     <Route path="/admin/:id" element={<AdminDetailAPI />} />

@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import reportWebVitals from "./reportWebVitals";
 // import Table from './Day-1/Task-1/Table';
 // import Table from './Day-1/Task-2/Table';
 import Table from "./Day-1/Task-4/Table";
@@ -47,6 +46,9 @@ import AdminDetailAPI from "./Day-5&6/Task-3/AdminDetail";
 import EmployeeCard from "./Day-5&6/Task-4/EmployeeCard";
 import EmployeeDetail from "./Day-5&6/Task-4/EmployeeDetail";
 import CRUDwithAPI from "./Day-5&6/CRUD/CRUD";
+import Home from "./Day-7/Home";
+import Login from "./Day-7/Login";
+import StorageDemo from "./Day-7/StorageDemo";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -110,10 +112,15 @@ root.render(
   //     <Route path="/employee/:id" element={<EmployeeDetail />} />
   //   </Routes>
   // </BrowserRouter>
-  <CRUDwithAPI />
+  // <CRUDwithAPI />
+
+  // Day - 7
+  // <StorageDemo/>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Login/>} />
+      <Route path="/dashboard" element={<Home />} />
+    </Routes>
+  </BrowserRouter>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

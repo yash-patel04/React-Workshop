@@ -37,19 +37,17 @@ const CRUDwithAPI = () => {
       });
   };
 
-  const handleEdit = (id,e) => {
+  const handleEdit = (id, e) => {
     e.preventDefault();
-      fetch(
-        `https://674f01b2bb559617b26da25d.mockapi.io/Student/${id}`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          setIdToUpdate(id);
-          setStudent(data);
-        });
+    fetch(`https://674f01b2bb559617b26da25d.mockapi.io/Student/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setIdToUpdate(id);
+        setStudent(data);
+      });
   };
 
-  const handleDelete = (id,e) => {
+  const handleDelete = (id, e) => {
     e.preventDefault();
     fetch(`https://674f01b2bb559617b26da25d.mockapi.io/Student/${id}`, {
       method: "DELETE",
@@ -169,8 +167,11 @@ const CRUDwithAPI = () => {
               <td>
                 <button
                   className="btn btn-warning"
-                  onClick={(e)=>{handleEdit(stu.id,e)}
-                    
+                  onClick={
+                    (e) => {
+                      handleEdit(stu.id, e);
+                    }
+
                     // () => {
                     //   fetch(
                     //     `https://674f01b2bb559617b26da25d.mockapi.io/Student/${stu.id}`
@@ -191,7 +192,7 @@ const CRUDwithAPI = () => {
                   className="btn btn-danger"
                   onClick={(e) => {
                     // setData(data.filter((_, index) => index !== i));
-                    handleDelete(stu.id,e);
+                    handleDelete(stu.id, e);
                   }}
                 >
                   Delete

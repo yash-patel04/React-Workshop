@@ -9,6 +9,7 @@ const CRUDwithAPI = () => {
     studentEmail: "",
   });
   let [isUpdate, setIsUpdate] = useState(false);
+  let [idToUpdate, setIdToUpdate] = useState(-1);
   // let navigate = useNavigate();
 
   useEffect(() => {
@@ -36,13 +37,28 @@ const CRUDwithAPI = () => {
       });
   };
 
-  const handleDelete = (id) => {
+  const handleEdit = (id,e) => {
+    e.preventDefault();
+      fetch(
+        `https://674f01b2bb559617b26da25d.mockapi.io/Student/${id}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setIdToUpdate(id);
+          setStudent(data);
+        });
+  };
+
+  const handleDelete = (id,e) => {
+    e.preventDefault();
     fetch(`https://674f01b2bb559617b26da25d.mockapi.io/Student/${id}`, {
       method: "DELETE",
-    }).then(() => {
-      setIsUpdate(!isUpdate);
-      // navigate("/")
-    });
+    })
+      .then((res) => res.json())
+      .then(() => {
+        setIsUpdate(!isUpdate);
+        // navigate("/")
+      });
   };
 
   return (
@@ -86,23 +102,56 @@ const CRUDwithAPI = () => {
         </tr>
         <tr>
           <td colSpan={2} align="center">
-            <button
-              className="btn btn-success"
-              onClick={
-                handleSubmit
-                //   () => {
-                //   setData([...data, student]);
-                //   setStudent({
-                //     studentName: "",
-                //     studentEnrol: "",
-                //     studentEmail: ""
-                //   });
-                // }
-              }
-            >
-              {" "}
-              Add{" "}
-            </button>
+            {idToUpdate === -1 && (
+              <button
+                className="btn btn-success"
+                onClick={
+                  handleSubmit
+                  //   () => {
+                  //   setData([...data, student]);
+                  //   setStudent({
+                  //     studentName: "",
+                  //     studentEnrol: "",
+                  //     studentEmail: ""
+                  //   });
+                  // }
+                }
+              >
+                {" "}
+                Add{" "}
+              </button>
+            )}
+            {idToUpdate !== -1 && (
+              <button
+                className="btn btn-warning"
+                onClick={(e) => {
+                  e.preventDefault();
+                  fetch(
+                    `https://674f01b2bb559617b26da25d.mockapi.io/Student/${idToUpdate}`,
+                    {
+                      method: "PUT",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(student),
+                    }
+                  )
+                    .then((res) => res.json())
+                    .then(() => {
+                      setIsUpdate(!isUpdate);
+                      setIdToUpdate(-1);
+                      setStudent({
+                        studentName: "",
+                        studentEnrol: "",
+                        studentEmail: "",
+                      });
+                    });
+                }}
+              >
+                {" "}
+                Edit{" "}
+              </button>
+            )}
           </td>
         </tr>
         <tr>
@@ -118,16 +167,31 @@ const CRUDwithAPI = () => {
               <td>{stu.studentEnrol}</td>
               <td>{stu.studentEmail}</td>
               <td>
-                <button className="btn btn-warning" onClick={() => {}}>
+                <button
+                  className="btn btn-warning"
+                  onClick={(e)=>{handleEdit(stu.id,e)}
+                    
+                    // () => {
+                    //   fetch(
+                    //     `https://674f01b2bb559617b26da25d.mockapi.io/Student/${stu.id}`
+                    //   )
+                    //     .then((res) => res.json())
+                    //     .then((data) => {
+                    //       setIdToUpdate(stu.id);
+                    //       setStudent(data);
+                    //     });
+                    // }
+                  }
+                >
                   Edit
                 </button>
               </td>{" "}
               <td>
                 <button
                   className="btn btn-danger"
-                  onClick={() => {
+                  onClick={(e) => {
                     // setData(data.filter((_, index) => index !== i));
-                    handleDelete(stu.id);
+                    handleDelete(stu.id,e);
                   }}
                 >
                   Delete

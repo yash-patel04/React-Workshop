@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const CRUDwithAPI = () => {
   let [data, setData] = useState([]);
-  const URL = "https://674f01b2bb559617b26da25d.mockapi.io/Student/"
+  const URL = "https://674f01b2bb559617b26da25d.mockapi.io/Student/";
   let [student, setStudent] = useState({
     studentName: "",
     studentEnrol: "",
@@ -38,15 +38,10 @@ const CRUDwithAPI = () => {
       });
   };
 
-  const handleGet = (id) => {
-    // e.preventDefault();
-    fetch(`${URL}/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setIdToUpdate(id);
-        setStudent(data);
-      });
-  };
+  // const handleGet = () => {
+  //   // e.preventDefault();
+
+  // };
 
   const handleUpdate = () => {
     fetch(`${URL}/${idToUpdate}`, {
@@ -140,7 +135,7 @@ const CRUDwithAPI = () => {
                 Add{" "}
               </button>
             )}
-            {idToUpdate !=  -1 && (
+            {idToUpdate != -1 && (
               <button
                 className="btn btn-warning"
                 onClick={
@@ -193,10 +188,22 @@ const CRUDwithAPI = () => {
                 <button
                   className="btn btn-warning"
                   onClick={
-                    handleGet(stu.id)
+                    () => {
+                      fetch(`${URL}/${stu.id}`)
+                        .then((res) => res.json())
+                        .then((data) => {
+                          setIdToUpdate(stu.id);
+                          setStudent(data);
+                        });
+                    }
+                    //   ()=>{
+                    //   setIdToUpdate(stu.id);
+
+                    // }
+
                     // (e) => {
-                      
-                      // }
+
+                    // }
                     // () => {
                     //   fetch(
                     // ${   } `URL/${stu.id}`

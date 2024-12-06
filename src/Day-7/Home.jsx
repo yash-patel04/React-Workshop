@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-  return (
-    <div>Home</div>
-  )
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(token == null){
+        navigate("/")
+        return
+    }
+  },[])
+    return (
+      <div>Home</div>
+    )
+  
 }
 
 export default Home

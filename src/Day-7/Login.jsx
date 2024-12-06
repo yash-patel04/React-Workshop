@@ -1,21 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Home from "./Home";
 
 const Login = () => {
-  let [data, setData] = useState({ Username: "", Password: "" });
+  let [data, setData] = useState({ UserName: "", Password: "" });
   let navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("token") != null) {
+      navigate("/dashboard");
+    }
+  }, []);
   return (
     <>
       <table>
         <tr>
-          <td>Enter Username:</td>
+          <td>Enter UserName:</td>
           <td>
             <input
               type="text"
-              value={data.Username}
+              value={data.UserName}
               onChange={(e) => {
-                setData({ ...data, Username: e.target.value });
+                setData({ ...data, UserName: e.target.value });
               }}
             />
           </td>
@@ -37,19 +42,24 @@ const Login = () => {
             <button
               className="btn btn-primary"
               onClick={() => {
-                fetch(`http://localhost:3000/login`, {
+                fetch("http://localhost:3000/login", {
                   method: "POST",
                   body: JSON.stringify(data),
                   headers: { "Content-Type": "application/json" },
                 })
                   .then((res) => res.json())
                   .then((res) => {
-                    if (res.sucess) {
-                      console.log("Success");
-                      //   navigate("/dashboard");
+                    console.log(res);
+                    if (res.success) {
+                      // console.log("Login successful");
+                      localStorage.setItem("token", res.token);
+                      navigate("/dashboard");
                     } else {
-                      alert("Invalid Credentials");
+                      alert("Invalid credentials");
                     }
+                  })
+                  .catch((err) => {
+                    console.error("Error during fetch:", err);
                   });
               }}
             >

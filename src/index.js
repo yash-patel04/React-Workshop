@@ -112,15 +112,15 @@ root.render(
   //     <Route path="/employee/:id" element={<EmployeeDetail />} />
   //   </Routes>
   // </BrowserRouter>
-  // <CRUDwithAPI />
+  <CRUDwithAPI /> 
 
   // Day - 7
   // <StorageDemo/>
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Login/>} />
-      <Route path="/dashboard" element={<Home />} />
-    </Routes>
-  </BrowserRouter>
+  // <BrowserRouter>
+  //   <Routes>
+  //     <Route path="/" element={<Login/>} />
+  //     <Route path="/dashboard" element={<Home />} />
+  //   </Routes>
+  // </BrowserRouter>
 );
 

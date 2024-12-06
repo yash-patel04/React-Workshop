@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const CRUDwithAPI = () => {
   let [data, setData] = useState([]);
+  const URL = "https://674f01b2bb559617b26da25d.mockapi.io/Student/"
   let [student, setStudent] = useState({
     studentName: "",
     studentEnrol: "",
@@ -13,13 +14,13 @@ const CRUDwithAPI = () => {
   // let navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`https://674f01b2bb559617b26da25d.mockapi.io/Student/`)
+    fetch(URL)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, [isUpdate]);
 
   const handleSubmit = () => {
-    fetch(`https://674f01b2bb559617b26da25d.mockapi.io/Student/`, {
+    fetch(URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,9 +38,9 @@ const CRUDwithAPI = () => {
       });
   };
 
-  const handleEdit = (id, e) => {
-    e.preventDefault();
-    fetch(`https://674f01b2bb559617b26da25d.mockapi.io/Student/${id}`)
+  const handleGet = (id) => {
+    // e.preventDefault();
+    fetch(`${URL}/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setIdToUpdate(id);
@@ -47,9 +48,29 @@ const CRUDwithAPI = () => {
       });
   };
 
+  const handleUpdate = () => {
+    fetch(`${URL}/${idToUpdate}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(student),
+    })
+      .then((res) => res.json())
+      .then(() => {
+        setIsUpdate(!isUpdate);
+        setIdToUpdate(-1);
+        setStudent({
+          studentName: "",
+          studentEnrol: "",
+          studentEmail: "",
+        });
+      });
+  };
+
   const handleDelete = (id, e) => {
     e.preventDefault();
-    fetch(`https://674f01b2bb559617b26da25d.mockapi.io/Student/${id}`, {
+    fetch(`${URL}/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -119,32 +140,36 @@ const CRUDwithAPI = () => {
                 Add{" "}
               </button>
             )}
-            {idToUpdate !== -1 && (
+            {idToUpdate !=  -1 && (
               <button
                 className="btn btn-warning"
-                onClick={(e) => {
-                  e.preventDefault();
-                  fetch(
-                    `https://674f01b2bb559617b26da25d.mockapi.io/Student/${idToUpdate}`,
-                    {
-                      method: "PUT",
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                      body: JSON.stringify(student),
-                    }
-                  )
-                    .then((res) => res.json())
-                    .then(() => {
-                      setIsUpdate(!isUpdate);
-                      setIdToUpdate(-1);
-                      setStudent({
-                        studentName: "",
-                        studentEnrol: "",
-                        studentEmail: "",
-                      });
-                    });
-                }}
+                onClick={
+                  handleUpdate
+                  // (e) => {
+                  // e.preventDefault();
+
+                  // fetch(
+                  // ${  `}URL/${idToUpdate}`,
+                  //   {
+                  //     method: "PUT",
+                  //     headers: {
+                  //       "Content-Type": "application/json",
+                  //     },
+                  //     body: JSON.stringify(student),
+                  //   }
+                  // )
+                  //   .then((res) => res.json())
+                  //   .then(() => {
+                  //     setIsUpdate(!isUpdate);
+                  //     setIdToUpdate(-1);
+                  //     setStudent({
+                  //       studentName: "",
+                  //       studentEnrol: "",
+                  //       studentEmail: "",
+                  //     });
+                  //   });
+                  // }
+                }
               >
                 {" "}
                 Edit{" "}
@@ -168,13 +193,13 @@ const CRUDwithAPI = () => {
                 <button
                   className="btn btn-warning"
                   onClick={
-                    (e) => {
-                      handleEdit(stu.id, e);
-                    }
-
+                    handleGet(stu.id)
+                    // (e) => {
+                      
+                      // }
                     // () => {
                     //   fetch(
-                    //     `https://674f01b2bb559617b26da25d.mockapi.io/Student/${stu.id}`
+                    // ${   } `URL/${stu.id}`
                     //   )
                     //     .then((res) => res.json())
                     //     .then((data) => {
